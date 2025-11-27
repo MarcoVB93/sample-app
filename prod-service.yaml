@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prod-deployment-service
+  namespace: prod # This service will be in the 'prod' namespace
+spec:
+  selector:
+    app: production-deployment # <--- IMPORTANT: This MUST match the label on your production-deployment's pods
+  ports:
+    - protocol: TCP
+      port: 8080      # The port the LoadBalancer will listen on externally
+      targetPort: 8080 # The port on the container inside the pod
+  type: LoadBalancer
